@@ -45,15 +45,21 @@
       );
 
       // Set cookie with token + email
-      res.cookie("auth", JSON.stringify({ token, email }), {
-        httpOnly: true,   // JS can't read it
-        secure: false,    // true if HTTPS
-        sameSite: "lax",  // adjust if frontend on different domain
-        maxAge: 24 * 60 * 60 * 1000 // 1 day
-      });
+      // res.cookie("auth", JSON.stringify({ token, email }), {
+      //   httpOnly: true,   // JS can't read it
+      //   secure: false,    // true if HTTPS
+      //   sameSite: "lax",  // adjust if frontend on different domain
+      //   maxAge: 24 * 60 * 60 * 1000 // 1 day
+      // });
+res.cookie("auth", JSON.stringify({ token, email }), {
+  httpOnly: true,
+  secure: false,
+  sameSite: "lax",
+  maxAge: 24 * 60 * 60 * 1000
+});
 
       // Send response
-      res.json({ message: "Logged in", role: user.role, name: user.name, userId: user._id });
+      res.json({ message: "Logged in",token, role: user.role, name: user.name, userId: user._id });
 
     } catch (err) {
       console.log(err);
