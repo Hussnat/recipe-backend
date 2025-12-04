@@ -9,6 +9,7 @@ const router = express.Router();
 router.post("/api/addRecipe", async (req, res) => {
   try {
     const Cookie = req.cookies?.auth;
+    console.log(req.cookies)
     if (!Cookie) return res.status(401).json({ message: "No auth cookie found" });
 
     const parsed = JSON.parse(Cookie); // { token, email }
