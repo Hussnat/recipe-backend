@@ -18,7 +18,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://recipe-frontend-bay.vercel.app"   // <-- Vercel frontend allow
+      "https://recipe-frontend-bay.vercel.app"
     ],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -26,9 +26,11 @@ app.use(
   })
 );
 
-// IMPORTANT — allow OPTIONS requests explicitly
 app.options("*", cors({
-  origin: "http://localhost:5173",
+  origin: [
+    "http://localhost:5173",
+    "https://recipe-frontend-bay.vercel.app"
+  ],
   credentials: true
 }));
 
@@ -41,7 +43,7 @@ app.use("/user", userRoute);
 app.use("/recipe", recipeRoute);
 
 app.get("/recipe/api/getRecipe", getRecipe);
-app.get("/recipe/api/getRecipeId", getRecipeId);
+app.get("/recipe/api/getRecipeId/:id", getRecipeId);   // <-- FIX
 app.put("/recipe/api/updateRecipe/:id", updateRecipe);
 app.delete("/recipe/api/deleteRecipe/:id", deleteRecipe);
 
